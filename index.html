@@ -20,18 +20,33 @@
         <script type="text/javascript">
             var dataset = [];  						 //Initialize empty array
 			for (var i = 0; i < 25; i++) {			 //Loop 25 times
-				var newNumber = Math.random() * 30;  //New random number (0-30)
+				var newNumber = Math.random() * 24;  //New random number (0-30)
 				dataset.push(newNumber);			 //Add new number to array
 			}
+            
+            var width = 500;
+            var height = 100;
 
-            d3.select("body").selectAll("div")
+            var svg = d3
+                .select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+
+            var circles = svg  
+                .selectAll("circle")
                 .data(dataset)
                 .enter()
-                .append("div")
-                .attr("class", "bar")
-                .style("height", function(d) {
-                    return d * 5 + "px";
-                })
+                .append("circle");
+                
+            circles
+            .attr("cx", function(d, i) {
+                return (i * 50) + 25;
+            })
+            .attr("cy", height/2)
+            .attr("r", function(d) {
+                return d;
+            });
             
         </script>
     </body>
