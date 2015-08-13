@@ -23,22 +23,17 @@
                 .attr("width", width)
                 .attr("height", height)
 
-            svg
-                .selectAll("rect")
-                .data(dataset)
-                .enter()
-                .append("rect")
-                .attr("x", function(d, i) {
-                  return i * (width / dataset.length);
-                })
-                .attr("y", function(d) {
-                  return height - d;
-                })
-                .attr("width", width / dataset.length - barPadding)
-                .attr("height", function (d) {
-                  return d;
-                })
-                .attr("fill", "teal");
+            svg.selectAll("rect")
+              .data(dataset)
+              .enter()
+              .append("rect")
+              .attr({
+                x: function(d, i) { return i * (width / dataset.length); },
+                y: function(d) { return height - d; },
+                width: width / dataset.length - barPadding,
+                height: function(d) { return d; },
+                fill: function(d) { return "teal"; }
+            });
 
         </script>
     </body>
