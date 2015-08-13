@@ -21,17 +21,21 @@
           [220,99]
         ];
 
-        var w = 1000;
-        var h = 400;
-        var padding = 50;
+        var w = 500;
+        var h = 100;
+        var padding = 20;
 
         var xScale = d3.scale.linear()
           .domain([0, d3.max(dataset, function(d) { return d[0]; })])
-          .range([padding, w - padding]);
+          .range([padding, w - padding * 2]);
 
         var yScale = d3.scale.linear()
-        .domain([0, d3.max(dataset, function(d) { return d[1]; })])
-        .range([padding, h - padding]);
+          .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+          .range([padding, h - padding]);
+
+        var rScale = d3.scale.linear()
+          .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+          .range([2, 5])
 
         var svg = d3
           .select("body")
@@ -51,7 +55,7 @@
             return yScale(d[1]);
           })
           .attr("r", function(d) {
-            return Math.sqrt(h - d[1]);
+            return rScale(d[1]);
           });
 
         svg
